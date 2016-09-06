@@ -1,0 +1,37 @@
+{
+  "name": "fis3-postprocessor-postcss",
+  "version": "0.1.0",
+  "description": "fis3 postcss",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests",
+    "publish": "npm publish --registry https://registry.npmjs.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiangyuan/fis3-postprocessor-postcss.git"
+  },
+  "keywords": [
+    "postcss",
+    "cssnext",
+    "autoprefixer",
+    "fis3"
+  ],
+  "author": "jero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jiangyuan/fis3-postprocessor-postcss/issues"
+  },
+  "homepage": "https://github.com/jiangyuan/fis3-postprocessor-postcss#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "fis-parser-node-sass": "^0.2.1",
+    "fis3": "^3.4.22",
+    "mocha": "^3.0.2"
+  },
+  "dependencies": {
+    "autoprefixer": "^6.4.1",
+    "cssnext": "^1.8.4",
+    "postcss": "^5.1.2"
+  }
+}
