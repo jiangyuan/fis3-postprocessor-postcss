@@ -59,7 +59,8 @@ fis.match('*.css', {
 
 ## FAQ
 * Q: postprocessor.postcss: No element indexed by 5
-
-使用 `sass` 并且全程启用 `sourceMap` 的时候，有时会抛出这个错误。
+```
+A:使用 `sass` 并且全程启用 `sourceMap` 的时候，有时会抛出这个错误。
 请检查 `sass` 的 `import` 是否太过混乱，这个错误通常是因为 sourceMap 计算源文件的行列时遇到不合乎逻辑的各种奇怪文件依赖引起。
+```
 
