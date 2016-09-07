@@ -6,6 +6,8 @@
 
 var path = require('path');
 var fis = require('fis3');
+var autoprefixer = require('autoprefixer');
+var cssnext = require('postcss-cssnext');
 var expect = require('chai').expect;
 var _release = fis.require('command-release/lib/release.js');
 var _deploy = fis.require('command-release/lib/deploy.js');
@@ -76,17 +78,34 @@ describe('postprocessor postcss', function () {
     release().then(done);
   });
 
-  it('postcss', function (done) {
+  it('自定义 plugins', function (done) {
+    self.options = {
+      sourceMapRelative: true,
+      plugins: [
+        cssnext({
+          browsers: ['last 40 version'] // cssnext 内置 autoprefixer
+        })
+      ]
+    };
+
+    fis.match('*', {
+      postprocessor: self
+    });
+
     fis.on('release:end', function (ret) {
       var src = ret.src;
       var sassFile = src['/sass-autoprefixer.scss'];
-      var nextFile = src['/cssnext.css'];
       var sassFileContent = sassFile.getContent();
-      // expect(sassFile.derived.length).to.eq(1);
-      // expect(sassFile.derived[0].ext).to.eq('.map'); // 必须有 map 文件
-      // expect(sassFileContent).to.contain('sourceMappingURL');
+      var nextFile = src['/cssnext.css'];
+      var nextFileContent = nextFile.getContent();
 
-      // done();
+      expect(sassFile.derived.length).to.eq(1);
+      expect(sassFile.derived[0].ext).to.eq('.map'); // 必须有 map 文件
+      expect(sassFileContent).to.contain('sourceMappingURL');
+      expect(sassFileContent).to.contain('-moz-linear');
+
+      expect(nextFileContent).to.not.contain('@custom-media'); // 编译成功
+      expect(nextFileContent).to.contain('sourceMappingURL'); // 存在 sourceMap
     });
 
     release().then(done);

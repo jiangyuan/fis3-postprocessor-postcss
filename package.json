@@ -5,7 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha tests",
-    "publish": "npm publish --registry https://registry.npmjs.com/"
+    "publish": "npm publish --registry https://registry.npmjs.com/",
+    "commitmsg": "validate-commit-msg",
+    "precommit": "npm t"
+  },
+  "config": {
+    "validate-commit-msg": {
+      "helpMessage": "commit 格式请参考 https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit"
+    }
   },
   "repository": {
     "type": "git",
@@ -13,7 +20,6 @@
   },
   "keywords": [
     "postcss",
-    "cssnext",
     "autoprefixer",
     "fis3"
   ],
@@ -27,11 +33,13 @@
     "chai": "^3.5.0",
     "fis-parser-node-sass": "^0.2.1",
     "fis3": "^3.4.22",
-    "mocha": "^3.0.2"
+    "husky": "^0.11.7",
+    "mocha": "^3.0.2",
+    "postcss-cssnext": "^2.8.0",
+    "validate-commit-msg": "^2.8.0"
   },
   "dependencies": {
     "autoprefixer": "^6.4.1",
-    "cssnext": "^1.8.4",
     "postcss": "^5.1.2"
   }
 }

@@ -9,11 +9,13 @@ var postcss = require('postcss');
 var autoprefixer = require('autoprefixer');
 
 var def = {
-  plugins: [],
-  sourceMap: true
+  plugins: [], // 其他插件
+  sourceMap: true, // 是否生成 source map
+  sourceMapRelative: false // 指向 source map 的路径是否是相对路径
 };
 
 module.exports = function(content, file, conf) {
+  // 只处理 css
   if (file.isCssLike) {
     var opts = fis.util.merge(def, conf);
     var plugins = opts.plugins;
@@ -21,10 +23,6 @@ module.exports = function(content, file, conf) {
     if (!plugins.length) {
       var config = typeof opts.autoprefixer === 'object' ? opts.autoprefixer : {};
       plugins.push(autoprefixer(config));
-    }
-
-    if (!plugins.length) {
-      return content;
     }
 
     var derived = file.derived;
@@ -51,7 +49,7 @@ module.exports = function(content, file, conf) {
 
     content = ret.css;
 
-    // 没有已存在的 source ，那就要自己创建这个文件了
+    // 没有已存在的 source map 文件，创建一个
     if (!mapObj && opts.sourceMap) {
       var mapping = fis.file.wrap(file.dirname + '/' + file.filename + file.rExt + '.map');
 
