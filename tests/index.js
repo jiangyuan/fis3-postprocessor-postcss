@@ -1,5 +1,5 @@
 /**
- * test
+ * unit test
  * @author jero
  * @date 2016-09-06
  */
@@ -42,8 +42,6 @@ describe('postprocessor postcss', function () {
       })
     });
 
-
-
     fis.match('*', {
       deploy: fis.plugin('local-deliver', {
         to: dev
@@ -61,7 +59,7 @@ describe('postprocessor postcss', function () {
       // sourceMap: false
     };
 
-    fis.match('*', {
+    fis.match('sass-autoprefixer.scss', {
       postprocessor: self
     });
 
@@ -78,7 +76,7 @@ describe('postprocessor postcss', function () {
     release().then(done);
   });
 
-  it('自定义 plugins', function (done) {
+  it('自定义 plugins -- cssnext', function (done) {
     self.options = {
       sourceMapRelative: true,
       plugins: [
@@ -88,7 +86,7 @@ describe('postprocessor postcss', function () {
       ]
     };
 
-    fis.match('*', {
+    fis.match('cssnext.css', {
       postprocessor: self
     });
 
@@ -106,6 +104,30 @@ describe('postprocessor postcss', function () {
 
       expect(nextFileContent).to.not.contain('@custom-media'); // 编译成功
       expect(nextFileContent).to.contain('sourceMappingURL'); // 存在 sourceMap
+    });
+
+    release().then(done);
+  });
+
+  it('自定义 plugins -- safe-parser', function (done) {
+    self.options = {
+      sourceMapRelative: true,
+      processConfig: {
+        parser: require('postcss-safe-parser')
+      }
+    };
+
+    fis.match('safe-parser.css', {
+      postprocessor: self
+    });
+
+    fis.on('release:end', function (ret) {
+      var src = ret.src;
+      var safeFile = src['/safe-parser.css'];
+      var safeFileContent = safeFile.getContent();
+
+      expect(safeFileContent).to.contain('}'); // 编译成功
+      expect(safeFileContent).to.contain('sourceMappingURL'); // 存在 sourceMap
     });
 
     release().then(done);

@@ -35,9 +35,10 @@ fis.match(/.*\/[a-zA-Z0-9]+\.scss$/, {
 ### 参数
 ```js
 {
+  processConfig: {}, // postcss().process 的参数，有些插件会用到 http://api.postcss.org/Processor.html#process)
   plugins: [], // 其他插件
   sourceMap: true, // 是否生成 source map
-  sourceMapRelative: false // 指向 source map 的路径是否是相对路径
+  sourceMapRelative: false // 指向 source map 的路径是否是相对路径，有些场景很有用
 }
 ```
 
@@ -59,8 +60,9 @@ fis.match('*.css', {
 
 ## FAQ
 * Q: postprocessor.postcss: No element indexed by 5
-```
-A:使用 `sass` 并且全程启用 `sourceMap` 的时候，有时会抛出这个错误。
-请检查 `sass` 的 `import` 是否太过混乱，这个错误通常是因为 sourceMap 计算源文件的行列时遇到不合乎逻辑的各种奇怪文件依赖引起。
-```
+>A: 使用 `sass` 并且全程启用 `sourceMap` 的时候，有时会抛出这个错误。
+>请检查 `sass` 的 `import` 是否太过混乱，这个错误通常是因为 sourceMap 计算源文件的行列时遇到不合乎逻辑的各种奇怪文件依赖引起。
 
+* Q: precss 不起作用
+
+>A: precss 是异步 api ，这个在 fis 中无能为力。

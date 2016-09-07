@@ -1,6 +1,6 @@
 {
   "name": "fis3-postprocessor-postcss",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "fis3 postcss",
   "main": "index.js",
   "scripts": {
@@ -36,6 +36,7 @@
     "husky": "^0.11.7",
     "mocha": "^3.0.2",
     "postcss-cssnext": "^2.8.0",
+    "postcss-safe-parser": "^2.0.0",
     "validate-commit-msg": "^2.8.0"
   },
   "dependencies": {
