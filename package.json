@@ -1,11 +1,11 @@
 {
   "name": "fis3-postprocessor-postcss",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "fis3 postcss",
   "main": "index.js",
   "scripts": {
     "test": "mocha tests",
-    "publish": "npm publish --registry https://registry.npmjs.com/",
+    "pub": "npm publish --registry https://registry.npmjs.com/",
     "commitmsg": "validate-commit-msg",
     "precommit": "npm t"
   },

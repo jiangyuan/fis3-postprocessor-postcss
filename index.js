@@ -63,6 +63,8 @@ module.exports = function(content, file, conf) {
         mapping.getUrl(fis.compile.settings.hash, fis.compile.settings.domain);
 
       content += mapGuide.replace('{url}', url);
+    } else if (mapObj) {
+      derived[0].setContent(ret.map.toString('utf8'));
     }
   }
 
