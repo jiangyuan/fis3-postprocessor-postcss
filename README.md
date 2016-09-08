@@ -49,8 +49,9 @@ npm t
 
 ## 其他 postcss 插件
 
-```
+```js
 var cssnext = require('postcss-cssnext');
+
 fis.match('*.css', {
   postprocessor: fis.plugin('postcss', {
     plugins: [cssnext] // 内置的 autoperfixer 会被覆盖掉，当然 cssnext 自带 autoprefixer
@@ -63,6 +64,6 @@ fis.match('*.css', {
 >A: 使用 `sass` 并且全程启用 `sourceMap` 的时候，有时会抛出这个错误。
 >请检查 `sass` 的 `import` 是否太过混乱，这个错误通常是因为 sourceMap 计算源文件的行列时遇到不合乎逻辑的各种奇怪文件依赖引起。
 
-* Q: precss 不起作用
+* Q: [precss](https://github.com/jonathantneal/precss) 不起作用
 
 >A: precss 是异步 api ，这个在 fis 中无能为力。
